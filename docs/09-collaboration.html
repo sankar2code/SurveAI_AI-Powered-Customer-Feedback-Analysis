@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stakeholder Collaboration — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <div class="flex min-h-screen">
+    <!-- ===== Sidebar ===== -->
+    <aside id="mobile-nav" class="fixed lg:static inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col z-40 -translate-x-full lg:translate-x-0 transition-base">
+      <div class="h-16 flex items-center gap-2.5 px-5 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+        <span class="font-display font-bold tracking-tight">Surve.AI</span>
+        <button onclick="SurveAI.toggleMobileNav()" class="ml-auto lg:hidden text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5 text-sm">
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-1">Workspace</p>
+        <a href="02-dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+        <a href="03-survey-builder.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="message-square-text" class="w-4 h-4"></i> Survey builder</a>
+        <a href="04-deploy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="rocket" class="w-4 h-4"></i> Deploy &amp; recruit</a>
+        <a href="05-live-monitor.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="activity" class="w-4 h-4"></i> Live monitor</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Insights</p>
+        <a href="06-insights.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layers" class="w-4 h-4"></i> Insights dashboard</a>
+        <a href="07-improvement.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="wand-2" class="w-4 h-4"></i> Auto-improvement</a>
+        <a href="08-forecasting.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Team</p>
+        <a href="09-collaboration.html" class="flex items-center gap-3 px-3 py-2 rounded-lg font-medium bg-indigo-50 text-indigo-700"><i data-lucide="users" class="w-4 h-4"></i> Collaboration</a>
+        <a href="10-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="settings" class="w-4 h-4"></i> Settings</a>
+      </nav>
+      <div class="border-t border-slate-200 p-3">
+        <a href="../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-50 text-sm transition-base mb-1"><i data-lucide="grid-2x2" class="w-4 h-4"></i> Mockup hub</a>
+        <div class="flex items-center gap-3 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">PN</div>
+          <div class="leading-tight"><p class="text-sm font-semibold">Priya Nandakumar</p><p class="text-xs text-slate-400">Product Manager</p></div>
+        </div>
+      </div>
+    </aside>
+    <div id="mobile-nav-overlay" onclick="SurveAI.toggleMobileNav()" class="hidden fixed inset-0 bg-slate-900/30 z-30 lg:hidden"></div>
+
+    <div class="flex-1 min-w-0">
+      <header class="h-16 bg-white/80 backdrop-blur border-b border-slate-200 flex items-center gap-4 px-5 sticky top-0 z-20">
+        <button onclick="SurveAI.toggleMobileNav()" class="lg:hidden text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-tight">Stakeholder collaboration</h1>
+          <p class="text-xs text-slate-400">"Post-Purchase NPS — Home Goods" · shared with 4 teammates · FR12</p>
+        </div>
+        <button onclick="SurveAI.openModal('export-modal')" class="ml-auto flex items-center gap-2 text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl shadow-sm shadow-indigo-200 transition-base"><i data-lucide="download" class="w-4 h-4"></i> Export</button>
+      </header>
+
+      <main class="p-5 sm:p-8 max-w-6xl mx-auto space-y-6">
+
+        <!-- Role-based view switcher -->
+        <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div>
+              <h2 class="font-display font-semibold text-sm">Viewing as</h2>
+              <p class="text-xs text-slate-400">Surve.AI tailors depth to the role — same underlying data, different altitude</p>
+            </div>
+            <div class="sm:ml-auto inline-flex rounded-xl border border-slate-200 p-1 bg-slate-50 self-start" id="view-switch">
+              <button data-view="exec" class="view-btn px-4 py-1.5 text-sm font-semibold rounded-lg bg-white shadow-sm text-slate-800">Executive summary</button>
+              <button data-view="analyst" class="view-btn px-4 py-1.5 text-sm font-semibold rounded-lg text-slate-500">Analyst detail</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Executive view -->
+        <div id="view-exec" class="space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+            <div class="flex items-center gap-2 mb-3"><span class="ai-badge"><i data-lucide="sparkles" class="w-3 h-3"></i> AI-written summary</span></div>
+            <h3 class="font-display font-semibold text-lg mb-2">The headline: shipping is becoming our top retention risk</h3>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-3xl">Across 1,956 screened responses, satisfaction held steady overall (NPS 47, +1 vs. last cycle) but <strong>shipping speed and tracking accuracy</strong> emerged as the fastest-growing complaint — up 18% in mentions and trending toward a 9–14% further rise over the next month. Checkout friction remains the #2 issue. On the positive side, packaging and loyalty redemption are now net-positive themes worth amplifying in marketing.</p>
+            <div class="grid sm:grid-cols-3 gap-4 mt-5">
+              <div class="rounded-xl bg-slate-50 p-4"><p class="text-xs text-slate-400 uppercase font-semibold tracking-wide">NPS (this cycle)</p><p class="font-display text-xl font-bold mt-1">47 <span class="text-emerald-600 text-sm font-medium">▲ 1</span></p></div>
+              <div class="rounded-xl bg-slate-50 p-4"><p class="text-xs text-slate-400 uppercase font-semibold tracking-wide">Top risk</p><p class="font-display text-base font-bold mt-1">Shipping &amp; tracking</p></div>
+              <div class="rounded-xl bg-slate-50 p-4"><p class="text-xs text-slate-400 uppercase font-semibold tracking-wide">Recommended action</p><p class="text-sm font-medium mt-1">Brief fulfilment before peak season</p></div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+            <h3 class="font-display font-semibold mb-4">Decisions logged from this report</h3>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i>
+                <div><p class="font-medium">Escalate carrier review with fulfilment ahead of Q4 peak</p><p class="text-xs text-slate-400 mt-0.5">Logged by Marcus Webb · linked to "Shipping speed &amp; tracking" insight · 2 hours ago</p></div>
+              </li>
+              <li class="flex items-start gap-3 p-3 rounded-xl bg-slate-50">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i>
+                <div><p class="font-medium">Pull packaging quotes for Q4 brand campaign creative</p><p class="text-xs text-slate-400 mt-0.5">Logged by Devon Cole · linked to "Packaging &amp; unboxing feel" insight · yesterday</p></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Analyst view -->
+        <div id="view-analyst" class="hidden space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+            <h3 class="font-display font-semibold mb-4">Theme-level detail with confidence &amp; sample sizes</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead><tr class="text-left text-xs uppercase tracking-wide text-slate-400 border-b border-slate-100">
+                  <th class="pb-2 font-semibold">Theme</th><th class="pb-2 font-semibold">Mentions</th><th class="pb-2 font-semibold">Sentiment</th><th class="pb-2 font-semibold">Confidence</th><th class="pb-2 font-semibold">Trend</th>
+                </tr></thead>
+                <tbody id="analyst-table"></tbody>
+              </table>
+            </div>
+            <p class="text-xs text-slate-400 mt-4 flex items-center gap-1.5"><i data-lucide="info" class="w-3.5 h-3.5"></i> Confidence reflects the model's clustering certainty — themes below 80% are held for analyst review before being surfaced to executives.</p>
+          </div>
+        </div>
+
+        <!-- Annotations -->
+        <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <h3 class="font-display font-semibold mb-4 flex items-center gap-2"><i data-lucide="message-square" class="w-4 h-4 text-indigo-500"></i> Comments &amp; annotations</h3>
+          <div class="space-y-4 mb-5" id="comment-list"></div>
+          <form onsubmit="event.preventDefault(); addComment(this); this.reset();" class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold shrink-0">PN</div>
+            <div class="flex-1">
+              <textarea required rows="2" placeholder="Add a comment or @mention a teammate on a specific finding…" class="w-full resize-none rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-indigo-400 outline-none transition-base"></textarea>
+              <button type="submit" class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl transition-base">Post comment</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Export modal -->
+  <div id="export-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-900/40" onclick="SurveAI.closeModal('export-modal')"></div>
+    <div data-modal-panel class="relative bg-white rounded-2xl card-shadow max-w-md w-full p-6 transition-base opacity-0 scale-95">
+      <h3 class="font-display font-bold text-lg mb-4">Export this report</h3>
+      <div class="space-y-2.5">
+        <button onclick="SurveAI.closeModal('export-modal'); SurveAI.toast('PDF deck ready — check your downloads.', 'success')" class="w-full flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 transition-base text-left">
+          <span class="w-9 h-9 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><i data-lucide="file-text" class="w-4 h-4"></i></span>
+          <span><span class="block text-sm font-semibold">PDF / slide deck</span><span class="block text-xs text-slate-400">One-click stakeholder presentation export — Story 1 acceptance criteria</span></span>
+        </button>
+        <button onclick="SurveAI.closeModal('export-modal'); SurveAI.toast('CSV export queued — link sent to your email.', 'success')" class="w-full flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 transition-base text-left">
+          <span class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><i data-lucide="table" class="w-4 h-4"></i></span>
+          <span><span class="block text-sm font-semibold">Raw + screened CSV</span><span class="block text-xs text-slate-400">Full traceable dataset for your BI tooling</span></span>
+        </button>
+        <button onclick="SurveAI.closeModal('export-modal'); SurveAI.toast('BI integration sync started — results will appear in your connected workspace shortly.', 'info')" class="w-full flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 transition-base text-left">
+          <span class="w-9 h-9 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center"><i data-lucide="plug-zap" class="w-4 h-4"></i></span>
+          <span><span class="block text-sm font-semibold">Sync to BI tool</span><span class="block text-xs text-slate-400">Push to your connected Looker / Tableau workspace</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    // View switcher
+    const execView = document.getElementById('view-exec');
+    const analystView = document.getElementById('view-analyst');
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('bg-white', 'shadow-sm', 'text-slate-800'));
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.add('text-slate-500'));
+        btn.classList.add('bg-white', 'shadow-sm', 'text-slate-800');
+        btn.classList.remove('text-slate-500');
+        if (btn.dataset.view === 'exec') { execView.classList.remove('hidden'); analystView.classList.add('hidden'); }
+        else { analystView.classList.remove('hidden'); execView.classList.add('hidden'); }
+      });
+    });
+
+    // Analyst table
+    const tbody = document.getElementById('analyst-table');
+    SurveAI.data.themes.forEach(t => {
+      const conf = Math.round(82 + (t.priority <= 2 ? 12 : t.priority <= 4 ? 6 : 2));
+      const sentLabel = t.sentiment < -0.15 ? `<span class="inline-flex items-center gap-1.5 text-rose-600"><span class="w-2 h-2 rounded-full dot-negative"></span>${t.sentiment.toFixed(2)}</span>`
+        : t.sentiment > 0.15 ? `<span class="inline-flex items-center gap-1.5 text-emerald-600"><span class="w-2 h-2 rounded-full dot-positive"></span>+${t.sentiment.toFixed(2)}</span>`
+        : `<span class="inline-flex items-center gap-1.5 text-amber-600"><span class="w-2 h-2 rounded-full dot-neutral"></span>${t.sentiment.toFixed(2)}</span>`;
+      const trendIcon = t.trend === 'up' ? 'trending-up' : t.trend === 'down' ? 'trending-down' : 'minus';
+      const tr = document.createElement('tr');
+      tr.className = 'border-b border-slate-50';
+      tr.innerHTML = `<td class="py-3 font-medium">${t.name}</td><td class="py-3">${t.mentions}</td><td class="py-3">${sentLabel}</td><td class="py-3">${conf}%</td><td class="py-3"><i data-lucide="${trendIcon}" class="w-4 h-4 text-slate-400"></i></td>`;
+      tbody.appendChild(tr);
+    });
+
+    // Comments
+    const clist = document.getElementById('comment-list');
+    function renderComments() {
+      clist.innerHTML = '';
+      SurveAI.data.comments.forEach(c => {
+        const initials = c.author.split(' ').map(n => n[0]).join('');
+        const div = document.createElement('div');
+        div.className = 'flex items-start gap-3';
+        div.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">${initials}</div>
+          <div class="flex-1 bg-slate-50 rounded-xl p-3.5">
+            <div class="flex items-center gap-2 text-sm">
+              <span class="font-semibold">${c.author}</span><span class="text-xs text-slate-400">${c.role} · ${c.time}</span>
+            </div>
+            <p class="text-sm text-slate-600 mt-1 leading-relaxed">${c.text}</p>
+            <span class="inline-flex items-center gap-1 mt-1.5 text-xs font-medium text-indigo-600"><i data-lucide="link-2" class="w-3 h-3"></i> ${c.target}</span>
+          </div>`;
+        clist.appendChild(div);
+      });
+      SurveAI.initIcons();
+    }
+    window.addComment = function (form) {
+      const text = form.querySelector('textarea').value.trim();
+      if (!text) return;
+      SurveAI.data.comments.unshift({ author: 'Priya Nandakumar', role: 'Product Manager', time: 'Just now', text, target: 'Shipping speed & tracking' });
+      renderComments();
+      SurveAI.toast('Comment posted — teammates with access will be notified.', 'success');
+    };
+    renderComments();
+    SurveAI.initIcons();
+  </script>
+</body>
+</html>

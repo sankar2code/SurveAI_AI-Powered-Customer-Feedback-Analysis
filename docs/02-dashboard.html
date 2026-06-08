@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <div class="flex min-h-screen">
+    <!-- ===== Sidebar (shared chrome — keep identical across app screens) ===== -->
+    <aside id="mobile-nav" class="fixed lg:static inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col z-40 -translate-x-full lg:translate-x-0 transition-base">
+      <div class="h-16 flex items-center gap-2.5 px-5 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </div>
+        <span class="font-display font-bold tracking-tight">Surve.AI</span>
+        <button onclick="SurveAI.toggleMobileNav()" class="ml-auto lg:hidden text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5 text-sm">
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-1">Workspace</p>
+        <a href="02-dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg font-medium bg-indigo-50 text-indigo-700"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+        <a href="03-survey-builder.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="message-square-text" class="w-4 h-4"></i> Survey builder</a>
+        <a href="04-deploy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="rocket" class="w-4 h-4"></i> Deploy &amp; recruit</a>
+        <a href="05-live-monitor.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="activity" class="w-4 h-4"></i> Live monitor</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Insights</p>
+        <a href="06-insights.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layers" class="w-4 h-4"></i> Insights dashboard</a>
+        <a href="07-improvement.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="wand-2" class="w-4 h-4"></i> Auto-improvement</a>
+        <a href="08-forecasting.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Team</p>
+        <a href="09-collaboration.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="users" class="w-4 h-4"></i> Collaboration</a>
+        <a href="10-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="settings" class="w-4 h-4"></i> Settings</a>
+      </nav>
+      <div class="border-t border-slate-200 p-3">
+        <a href="../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-50 text-sm transition-base mb-1"><i data-lucide="grid-2x2" class="w-4 h-4"></i> Mockup hub</a>
+        <div class="flex items-center gap-3 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">PN</div>
+          <div class="leading-tight">
+            <p class="text-sm font-semibold">Priya Nandakumar</p>
+            <p class="text-xs text-slate-400">Product Manager</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div id="mobile-nav-overlay" onclick="SurveAI.toggleMobileNav()" class="hidden fixed inset-0 bg-slate-900/30 z-30 lg:hidden"></div>
+
+    <!-- ===== Main ===== -->
+    <div class="flex-1 min-w-0">
+      <!-- Topbar -->
+      <header class="h-16 bg-white/80 backdrop-blur border-b border-slate-200 flex items-center gap-4 px-5 sticky top-0 z-20">
+        <button onclick="SurveAI.toggleMobileNav()" class="lg:hidden text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-tight">Good afternoon, Priya</h1>
+          <p class="text-xs text-slate-400">Brightline Retail Co. · Tuesday, 9 June</p>
+        </div>
+        <div class="ml-auto flex items-center gap-3">
+          <button onclick="SurveAI.toast('No new notifications since this morning\\'s digest.')" class="relative w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-base">
+            <i data-lucide="bell" class="w-4 h-4"></i>
+            <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white"></span>
+          </button>
+          <a href="03-survey-builder.html" class="hidden sm:inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-sm shadow-indigo-200 transition-base">
+            <i data-lucide="plus" class="w-4 h-4"></i> New survey
+          </a>
+        </div>
+      </header>
+
+      <main class="p-5 sm:p-8 max-w-7xl mx-auto">
+        <!-- North star + KPI row -->
+        <div class="grid lg:grid-cols-4 gap-4 mb-6">
+          <div class="lg:col-span-2 bg-gradient-to-br from-indigo-600 to-cyan-500 text-white rounded-2xl p-6 card-shadow relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-10 w-40 h-40 rounded-full bg-white/10"></div>
+            <p class="text-xs uppercase tracking-wide text-indigo-100 font-semibold">North Star metric</p>
+            <p class="font-display text-sm font-medium mt-1 text-indigo-50">Feedback-to-decision cycle time</p>
+            <div class="flex items-end gap-3 mt-3">
+              <span class="font-display text-4xl font-bold">3.4 hrs</span>
+              <span class="text-sm text-indigo-100 mb-1.5 flex items-center gap-1"><i data-lucide="arrow-down" class="w-3.5 h-3.5"></i> down from 5.1 days (manual baseline)</span>
+            </div>
+            <div class="mt-4 h-1.5 rounded-full bg-white/20 overflow-hidden">
+              <div class="h-full bg-white rounded-full" style="width: 92%"></div>
+            </div>
+            <p class="text-xs text-indigo-100 mt-2">92% of the way to the "hours, not days" target</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 card-shadow">
+            <div class="flex items-center justify-between">
+              <p class="text-xs uppercase tracking-wide text-slate-400 font-semibold">Active surveys</p>
+              <i data-lucide="radio" class="w-4 h-4 text-indigo-400"></i>
+            </div>
+            <p class="font-display text-2xl font-bold mt-2">2</p>
+            <p class="text-xs text-slate-400 mt-1">1 analyzing · 1 collecting live</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 card-shadow">
+            <div class="flex items-center justify-between">
+              <p class="text-xs uppercase tracking-wide text-slate-400 font-semibold">Avg. completion rate</p>
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
+            </div>
+            <p class="font-display text-2xl font-bold mt-2">64%</p>
+            <p class="text-xs text-emerald-600 mt-1 flex items-center gap-1"><i data-lucide="trending-up" class="w-3 h-3"></i> +4 pts vs. 60% target</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          <!-- Survey portfolio -->
+          <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center justify-between p-5 border-b border-slate-100">
+              <h2 class="font-display font-semibold">Your surveys</h2>
+              <a href="04-deploy.html" class="text-sm text-indigo-600 font-medium hover:text-indigo-700 flex items-center gap-1">View all <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+            </div>
+            <ul class="divide-y divide-slate-100" id="survey-list"></ul>
+          </div>
+
+          <!-- Right column: AI digest + quick actions -->
+          <div class="space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="ai-badge"><i data-lucide="sparkles" class="w-3 h-3"></i> AI weekly digest</span>
+              </div>
+              <p class="text-sm text-slate-600 leading-relaxed">Across <strong>2,143</strong> screened responses this cycle, <strong>"Shipping speed &amp; tracking"</strong> overtook checkout friction as your #1 issue — mentions up 18% week-over-week with sentiment trending more negative.</p>
+              <a href="06-insights.html" class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700">Open the full breakdown <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+              <h3 class="font-display font-semibold mb-3 text-sm">Quick actions</h3>
+              <div class="space-y-2">
+                <a href="03-survey-builder.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-base text-sm font-medium text-slate-700"><span class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center"><i data-lucide="message-square-text" class="w-4 h-4"></i></span> Draft a new survey with AI</a>
+                <a href="07-improvement.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-base text-sm font-medium text-slate-700"><span class="w-8 h-8 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center"><i data-lucide="wand-2" class="w-4 h-4"></i></span> Review suggested question variants</a>
+                <a href="09-collaboration.html" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-base text-sm font-medium text-slate-700"><span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><i data-lucide="share-2" class="w-4 h-4"></i></span> Share latest report with stakeholders</a>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+              <h3 class="font-display font-semibold mb-1 text-sm">Pilot milestone</h3>
+              <p class="text-xs text-slate-400 mb-3">Q3 2026 · Platform pilot (5 businesses)</p>
+              <div class="flex items-center gap-2 text-sm text-slate-600"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Onboarding complete</div>
+              <div class="flex items-center gap-2 text-sm text-slate-600 mt-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Baseline measured (5.1 day avg.)</div>
+              <div class="flex items-center gap-2 text-sm text-slate-400 mt-1.5"><i data-lucide="circle-dashed" class="w-4 h-4"></i> Outcome comparison — due wk. 8</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    // Render survey list from shared mock data so numbers stay consistent across screens
+    const statusStyles = {
+      live:      { label: 'Live',      cls: 'bg-emerald-50 text-emerald-700', dot: 'bg-emerald-500 live-dot' },
+      analyzing: { label: 'Analyzing', cls: 'bg-cyan-50 text-cyan-700',       dot: 'bg-cyan-500 live-dot' },
+      complete:  { label: 'Complete',  cls: 'bg-slate-100 text-slate-600',    dot: 'bg-slate-400' },
+      draft:     { label: 'Draft',     cls: 'bg-amber-50 text-amber-700',     dot: 'bg-amber-400' },
+    };
+    const list = document.getElementById('survey-list');
+    SurveAI.data.surveys.forEach(s => {
+      const st = statusStyles[s.status];
+      const li = document.createElement('li');
+      li.className = 'p-5 hover:bg-slate-50/70 transition-base cursor-pointer';
+      li.onclick = () => {
+        if (s.status === 'analyzing' || s.status === 'complete') location.href = '06-insights.html';
+        else if (s.status === 'live') location.href = '05-live-monitor.html';
+        else location.href = '03-survey-builder.html';
+      };
+      li.innerHTML = `
+        <div class="flex items-center justify-between gap-4">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-full ${st.cls}"><span class="w-1.5 h-1.5 rounded-full ${st.dot}"></span>${st.label}</span>
+              <span class="text-xs text-slate-400">${s.channel}</span>
+            </div>
+            <p class="font-semibold text-slate-800 mt-1.5 truncate">${s.name}</p>
+            <p class="text-xs text-slate-400 mt-0.5">${s.responses.toLocaleString()} of ${s.target.toLocaleString()} responses · updated ${s.lastActivity}</p>
+          </div>
+          <div class="text-right shrink-0 hidden sm:block">
+            <p class="font-display font-bold text-slate-800">${s.completion}%</p>
+            <p class="text-xs text-slate-400">completion</p>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
+        </div>`;
+      list.appendChild(li);
+    });
+    SurveAI.initIcons();
+  </script>
+</body>
+</html>

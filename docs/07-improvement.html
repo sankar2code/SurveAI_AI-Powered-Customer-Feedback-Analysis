@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Survey Auto-Improvement — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <div class="flex min-h-screen">
+    <!-- ===== Sidebar ===== -->
+    <aside id="mobile-nav" class="fixed lg:static inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col z-40 -translate-x-full lg:translate-x-0 transition-base">
+      <div class="h-16 flex items-center gap-2.5 px-5 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+        <span class="font-display font-bold tracking-tight">Surve.AI</span>
+        <button onclick="SurveAI.toggleMobileNav()" class="ml-auto lg:hidden text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5 text-sm">
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-1">Workspace</p>
+        <a href="02-dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+        <a href="03-survey-builder.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="message-square-text" class="w-4 h-4"></i> Survey builder</a>
+        <a href="04-deploy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="rocket" class="w-4 h-4"></i> Deploy &amp; recruit</a>
+        <a href="05-live-monitor.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="activity" class="w-4 h-4"></i> Live monitor</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Insights</p>
+        <a href="06-insights.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layers" class="w-4 h-4"></i> Insights dashboard</a>
+        <a href="07-improvement.html" class="flex items-center gap-3 px-3 py-2 rounded-lg font-medium bg-indigo-50 text-indigo-700"><i data-lucide="wand-2" class="w-4 h-4"></i> Auto-improvement</a>
+        <a href="08-forecasting.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Team</p>
+        <a href="09-collaboration.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="users" class="w-4 h-4"></i> Collaboration</a>
+        <a href="10-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="settings" class="w-4 h-4"></i> Settings</a>
+      </nav>
+      <div class="border-t border-slate-200 p-3">
+        <a href="../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-50 text-sm transition-base mb-1"><i data-lucide="grid-2x2" class="w-4 h-4"></i> Mockup hub</a>
+        <div class="flex items-center gap-3 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">PN</div>
+          <div class="leading-tight"><p class="text-sm font-semibold">Priya Nandakumar</p><p class="text-xs text-slate-400">Product Manager</p></div>
+        </div>
+      </div>
+    </aside>
+    <div id="mobile-nav-overlay" onclick="SurveAI.toggleMobileNav()" class="hidden fixed inset-0 bg-slate-900/30 z-30 lg:hidden"></div>
+
+    <div class="flex-1 min-w-0">
+      <header class="h-16 bg-white/80 backdrop-blur border-b border-slate-200 flex items-center gap-4 px-5 sticky top-0 z-20">
+        <button onclick="SurveAI.toggleMobileNav()" class="lg:hidden text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-tight">Survey auto-improvement</h1>
+          <p class="text-xs text-slate-400">Suggested from "Post-Purchase NPS — Home Goods" responses · FR8 / FR9 · Story 4</p>
+        </div>
+        <span class="ai-badge ml-auto hidden sm:inline-flex"><i data-lucide="sparkles" class="w-3 h-3"></i> Auto-improvement flywheel</span>
+      </header>
+
+      <main class="p-5 sm:p-8 max-w-6xl mx-auto space-y-6">
+
+        <div class="bg-gradient-to-br from-indigo-600 to-cyan-500 text-white rounded-2xl p-6 card-shadow flex flex-col sm:flex-row sm:items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center shrink-0"><i data-lucide="refresh-cw" class="w-6 h-6"></i></div>
+          <div>
+            <p class="font-display font-semibold">Each survey cycle makes the next one sharper</p>
+            <p class="text-sm text-indigo-100 mt-1 max-w-2xl">Surve.AI analysed open-ended responses from your last cycle and drafted 3 question variants that target this quarter's emerging themes — directly. Accept, edit, or reject each one before it ever reaches a respondent.</p>
+          </div>
+        </div>
+
+        <!-- Variant review -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow">
+          <div class="p-5 border-b border-slate-100">
+            <h2 class="font-display font-semibold">Suggested question variants</h2>
+            <p class="text-xs text-slate-400 mt-0.5">Acceptance criteria (Story 4): business can accept, edit, or reject any AI-suggested question before deployment</p>
+          </div>
+          <div class="divide-y divide-slate-100" id="variant-list"></div>
+        </section>
+
+        <!-- A/B test setup & results -->
+        <section class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+            <div class="flex items-center gap-2 mb-1">
+              <h2 class="font-display font-semibold">A/B test — accepted variant</h2>
+              <span class="text-xs text-slate-400">FR9</span>
+            </div>
+            <p class="text-sm text-slate-500 mb-4">"Accepted" variants are deployed in parallel against the control question and compared statistically before becoming the new default.</p>
+            <div class="space-y-3">
+              <div class="rounded-xl border-2 border-indigo-200 bg-indigo-50/40 p-4">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-indigo-600">Variant B (AI-suggested)</span>
+                  <span class="text-xs font-semibold text-indigo-600">52% of traffic</span>
+                </div>
+                <p class="text-sm text-slate-700">"If a friend asked whether to shop with us, what's the first thing you'd tell them — good or bad?"</p>
+              </div>
+              <div class="rounded-xl border border-slate-200 p-4">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-slate-400">Variant A (control)</span>
+                  <span class="text-xs font-semibold text-slate-400">48% of traffic</span>
+                </div>
+                <p class="text-sm text-slate-600">"Would you recommend us to a friend?"</p>
+              </div>
+            </div>
+            <button onclick="SurveAI.toast('A/B deployment scheduled to begin with the next survey cycle.', 'success')" class="w-full mt-5 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl shadow-sm shadow-indigo-200 transition-base"><i data-lucide="split" class="w-4 h-4"></i> Deploy A/B test next cycle</button>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+            <h2 class="font-display font-semibold mb-1">Last cycle's results</h2>
+            <p class="text-sm text-slate-500 mb-5">"Loyalty Program Renewal Feedback" — Variant vs. control, statistically compared</p>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-sm mb-1.5"><span class="font-medium">Response depth (avg. words per open-text answer)</span></div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs w-20 text-indigo-600 font-medium">Variant</span>
+                  <div class="flex-1 h-2.5 rounded-full bg-slate-100"><div class="h-full rounded-full bg-indigo-500" style="width:78%"></div></div>
+                  <span class="text-xs font-semibold w-10 text-right">42 w</span>
+                </div>
+                <div class="flex items-center gap-3 mt-1.5">
+                  <span class="text-xs w-20 text-slate-400 font-medium">Control</span>
+                  <div class="flex-1 h-2.5 rounded-full bg-slate-100"><div class="h-full rounded-full bg-slate-300" style="width:46%"></div></div>
+                  <span class="text-xs font-semibold w-10 text-right text-slate-500">25 w</span>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1.5"><span class="font-medium">Completion rate</span></div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs w-20 text-indigo-600 font-medium">Variant</span>
+                  <div class="flex-1 h-2.5 rounded-full bg-slate-100"><div class="h-full rounded-full bg-indigo-500" style="width:65%"></div></div>
+                  <span class="text-xs font-semibold w-10 text-right">65%</span>
+                </div>
+                <div class="flex items-center gap-3 mt-1.5">
+                  <span class="text-xs w-20 text-slate-400 font-medium">Control</span>
+                  <div class="flex-1 h-2.5 rounded-full bg-slate-100"><div class="h-full rounded-full bg-slate-300" style="width:59%"></div></div>
+                  <span class="text-xs font-semibold w-10 text-right text-slate-500">59%</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5 flex items-center gap-2 text-sm bg-emerald-50 text-emerald-700 rounded-xl px-4 py-3">
+              <i data-lucide="badge-check" class="w-4 h-4 shrink-0" /> Statistically significant at 95% confidence (p = 0.012, n = 612) — variant promoted to default for next deployment
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    const list = document.getElementById('variant-list');
+    const statusCfg = {
+      suggested: { label: 'Awaiting review', cls: 'bg-amber-50 text-amber-700' },
+      accepted:  { label: 'Accepted', cls: 'bg-emerald-50 text-emerald-700' },
+      rejected:  { label: 'Rejected', cls: 'bg-slate-100 text-slate-500' },
+    };
+    function render() {
+      list.innerHTML = '';
+      SurveAI.data.questionVariants.forEach((v, idx) => {
+        const st = statusCfg[v.status];
+        const row = document.createElement('div');
+        row.className = 'p-5';
+        row.innerHTML = `
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <span class="ai-badge"><i data-lucide="sparkles" class="w-3 h-3"></i> Suggested variant</span>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${st.cls}">${st.label}</span>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1">Current question</p>
+              <p class="text-sm text-slate-500">${v.base}</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide text-indigo-500 mb-1">AI-suggested replacement</p>
+              <p class="text-sm text-slate-800 font-medium" contenteditable="true" spellcheck="false">${v.variant}</p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 mt-3 flex items-start gap-1.5"><i data-lucide="lightbulb" class="w-3.5 h-3.5 mt-0.5 shrink-0"></i> ${v.rationale}</p>
+          <div class="flex items-center gap-2 mt-4">
+            <button data-act="accept" data-idx="${idx}" class="flex items-center gap-1.5 text-sm font-semibold px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white transition-base"><i data-lucide="check" class="w-3.5 h-3.5"></i> Accept</button>
+            <button data-act="reject" data-idx="${idx}" class="flex items-center gap-1.5 text-sm font-semibold px-3.5 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="x" class="w-3.5 h-3.5"></i> Reject</button>
+            <button class="flex items-center gap-1.5 text-sm font-medium px-3.5 py-2 rounded-xl text-slate-500 hover:bg-slate-50 transition-base ml-auto" onclick="SurveAI.toast('Generating an alternative phrasing…', 'info')"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Try another</button>
+          </div>`;
+        list.appendChild(row);
+      });
+      list.querySelectorAll('button[data-act]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = +btn.dataset.idx;
+          SurveAI.data.questionVariants[i].status = btn.dataset.act === 'accept' ? 'accepted' : 'rejected';
+          SurveAI.toast(btn.dataset.act === 'accept' ? 'Variant accepted — queued for A/B testing next cycle.' : 'Variant rejected — Surve.AI will learn from this for future suggestions.', btn.dataset.act === 'accept' ? 'success' : 'default');
+          render();
+        });
+      });
+      SurveAI.initIcons();
+    }
+    render();
+  </script>
+</body>
+</html>

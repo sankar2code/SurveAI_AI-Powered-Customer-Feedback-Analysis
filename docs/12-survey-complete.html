@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thank you — Brightline Retail Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen">
+
+  <div class="min-h-screen flex items-center justify-center py-8 px-4">
+    <div class="w-full max-w-sm bg-white rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden flex flex-col" style="min-height: 700px;">
+
+      <div class="px-6 pt-6 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i></div>
+          <span class="text-sm font-semibold text-slate-500">Brightline Retail Co. <span class="text-slate-300">via</span> Surve.AI</span>
+        </div>
+        <div class="mt-3 h-1.5 rounded-full bg-slate-100 overflow-hidden">
+          <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400" style="width: 100%"></div>
+        </div>
+        <p class="text-xs text-slate-400 mt-1.5">Complete · thank you for your time</p>
+      </div>
+
+      <div class="flex-1 px-6 py-7 flex flex-col">
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="check" class="w-8 h-8"></i>
+          </div>
+          <h2 class="font-display text-xl font-bold">You're all set — thank you!</h2>
+          <p class="text-sm text-slate-500 mt-1.5 leading-relaxed max-w-[18rem] mx-auto">Your answers help Brightline fix what's actually getting in the way — not just what looks good in a chart. Here's your thank-you.</p>
+        </div>
+
+        <!-- Voucher reveal -->
+        <div class="mt-6 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-400 text-white p-5 relative overflow-hidden">
+          <div class="absolute -right-6 -bottom-8 w-28 h-28 rounded-full bg-white/15"></div>
+          <div class="relative flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center"><i data-lucide="ticket" class="w-5 h-5"></i></div>
+            <div>
+              <p class="text-xs uppercase tracking-wide font-semibold text-amber-50">Your reward</p>
+              <p class="font-display text-lg font-bold">$10 Amazon e-gift voucher</p>
+            </div>
+          </div>
+          <button onclick="SurveAI.toast('Voucher code AMZN-7Q3X-K9P2 sent to your email — check your inbox.', 'success')" class="relative w-full mt-4 bg-white/95 hover:bg-white text-amber-700 font-semibold text-sm py-2.5 rounded-xl transition-base flex items-center justify-center gap-2">
+            <i data-lucide="mail" class="w-4 h-4"></i> Send code to my email
+          </button>
+        </div>
+
+        <!-- Referral chain -->
+        <div class="mt-6">
+          <div class="flex items-center gap-2 mb-2">
+            <i data-lucide="git-branch" class="w-4 h-4 text-indigo-500"></i>
+            <h3 class="font-display font-semibold text-sm">Know someone who'd give honest feedback too?</h3>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed mb-3">Share your link — when a friend completes the survey, <strong>you both</strong> get an extra $5 voucher. No limit on the chain.</p>
+          <div class="rounded-xl border border-slate-200 p-3 flex items-center gap-2">
+            <input readonly value="surve.ai/r/brightline/8f3k-pn21" class="flex-1 text-xs text-slate-500 bg-transparent outline-none truncate" />
+            <button onclick="navigator.clipboard?.writeText('surve.ai/r/brightline/8f3k-pn21'); SurveAI.toast('Referral link copied to clipboard.', 'success')" class="shrink-0 text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+          </div>
+          <div class="grid grid-cols-3 gap-2 mt-3">
+            <button onclick="SurveAI.toast('Opening share sheet for Messages…')" class="flex flex-col items-center gap-1.5 py-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 transition-base text-xs font-medium text-slate-600"><i data-lucide="message-circle" class="w-4 h-4 text-slate-400"></i> Message</button>
+            <button onclick="SurveAI.toast('Opening share sheet for Email…')" class="flex flex-col items-center gap-1.5 py-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 transition-base text-xs font-medium text-slate-600"><i data-lucide="mail" class="w-4 h-4 text-slate-400"></i> Email</button>
+            <button onclick="SurveAI.toast('Opening share sheet for social…')" class="flex flex-col items-center gap-1.5 py-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 transition-base text-xs font-medium text-slate-600"><i data-lucide="share-2" class="w-4 h-4 text-slate-400"></i> Share</button>
+          </div>
+          <div class="mt-3 flex items-center gap-2 text-xs text-slate-400">
+            <i data-lucide="users" class="w-3.5 h-3.5"></i> 3 friends have joined through links like yours this week
+          </div>
+        </div>
+
+        <p class="text-[11px] text-slate-300 mt-auto pt-6 text-center leading-relaxed">Your responses are anonymised before analysis · referral incentives follow ESOMAR research-ethics guidelines · <a href="../index.html" class="underline hover:text-slate-400">mockup hub</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+</body>
+</html>

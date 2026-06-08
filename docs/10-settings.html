@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings &amp; Team — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <div class="flex min-h-screen">
+    <!-- ===== Sidebar ===== -->
+    <aside id="mobile-nav" class="fixed lg:static inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col z-40 -translate-x-full lg:translate-x-0 transition-base">
+      <div class="h-16 flex items-center gap-2.5 px-5 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+        <span class="font-display font-bold tracking-tight">Surve.AI</span>
+        <button onclick="SurveAI.toggleMobileNav()" class="ml-auto lg:hidden text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5 text-sm">
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-1">Workspace</p>
+        <a href="02-dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+        <a href="03-survey-builder.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="message-square-text" class="w-4 h-4"></i> Survey builder</a>
+        <a href="04-deploy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="rocket" class="w-4 h-4"></i> Deploy &amp; recruit</a>
+        <a href="05-live-monitor.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="activity" class="w-4 h-4"></i> Live monitor</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Insights</p>
+        <a href="06-insights.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layers" class="w-4 h-4"></i> Insights dashboard</a>
+        <a href="07-improvement.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="wand-2" class="w-4 h-4"></i> Auto-improvement</a>
+        <a href="08-forecasting.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Team</p>
+        <a href="09-collaboration.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="users" class="w-4 h-4"></i> Collaboration</a>
+        <a href="10-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg font-medium bg-indigo-50 text-indigo-700"><i data-lucide="settings" class="w-4 h-4"></i> Settings</a>
+      </nav>
+      <div class="border-t border-slate-200 p-3">
+        <a href="../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-50 text-sm transition-base mb-1"><i data-lucide="grid-2x2" class="w-4 h-4"></i> Mockup hub</a>
+        <div class="flex items-center gap-3 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">PN</div>
+          <div class="leading-tight"><p class="text-sm font-semibold">Priya Nandakumar</p><p class="text-xs text-slate-400">Product Manager</p></div>
+        </div>
+      </div>
+    </aside>
+    <div id="mobile-nav-overlay" onclick="SurveAI.toggleMobileNav()" class="hidden fixed inset-0 bg-slate-900/30 z-30 lg:hidden"></div>
+
+    <div class="flex-1 min-w-0">
+      <header class="h-16 bg-white/80 backdrop-blur border-b border-slate-200 flex items-center gap-4 px-5 sticky top-0 z-20">
+        <button onclick="SurveAI.toggleMobileNav()" class="lg:hidden text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-tight">Settings &amp; team</h1>
+          <p class="text-xs text-slate-400">Brightline Retail Co. workspace · Growth plan</p>
+        </div>
+      </header>
+
+      <main class="p-5 sm:p-8 max-w-5xl mx-auto space-y-6">
+
+        <!-- Screening governance -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center gap-2 mb-1">
+            <i data-lucide="shield" class="w-4 h-4 text-indigo-500"></i>
+            <h2 class="font-display font-semibold">Screening governance</h2>
+          </div>
+          <p class="text-sm text-slate-500 mb-5 max-w-2xl">Per the PRD's autonomy boundaries, the screening confidence threshold is the dial that decides how aggressively Surve.AI excludes low-quality responses automatically — changing it requires PM sign-off and is logged to the audit trail.</p>
+
+          <div class="rounded-xl border border-slate-200 p-5">
+            <div class="flex items-center justify-between mb-2">
+              <label for="threshold" class="text-sm font-medium">Auto-exclusion confidence threshold</label>
+              <span class="font-display font-bold text-indigo-600" id="threshold-value">70%</span>
+            </div>
+            <input id="threshold" type="range" min="50" max="95" value="70" class="w-full accent-indigo-600" oninput="document.getElementById('threshold-value').textContent = this.value + '%'" />
+            <div class="flex justify-between text-xs text-slate-400 mt-1">
+              <span>50% — more responses auto-excluded, higher false-positive risk</span>
+              <span>95% — fewer auto-excluded, more sent to manual review</span>
+            </div>
+            <div class="mt-4 flex items-start gap-2.5 text-xs text-amber-700 bg-amber-50 rounded-lg p-3">
+              <i data-lucide="lock" class="w-4 h-4 mt-0.5 shrink-0"></i>
+              <span>Responses scoring below this confidence are <strong>flagged for manual review</strong> rather than auto-excluded — never silently dropped.</span>
+            </div>
+            <button onclick="SurveAI.openModal('approval-modal')" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl transition-base"><i data-lucide="send" class="w-4 h-4"></i> Submit threshold change for PM approval</button>
+          </div>
+        </section>
+
+        <!-- Team & roles -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <i data-lucide="users" class="w-4 h-4 text-indigo-500"></i>
+              <h2 class="font-display font-semibold">Team &amp; role-based access</h2>
+            </div>
+            <button onclick="SurveAI.toast('Invite sent — they\\'ll receive a magic link to join the workspace.', 'success')" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1.5"><i data-lucide="user-plus" class="w-4 h-4"></i> Invite teammate</button>
+          </div>
+          <p class="text-sm text-slate-500 mb-4">Access level determines whether someone sees the executive summary, full analyst detail, or read-only views (FR12).</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead><tr class="text-left text-xs uppercase tracking-wide text-slate-400 border-b border-slate-100">
+                <th class="pb-2 font-semibold">Name</th><th class="pb-2 font-semibold">Role</th><th class="pb-2 font-semibold">Access level</th><th class="pb-2 font-semibold">Email</th><th></th>
+              </tr></thead>
+              <tbody id="team-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Aligned scheduling -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center gap-2 mb-1">
+            <i data-lucide="calendar-clock" class="w-4 h-4 text-indigo-500"></i>
+            <h2 class="font-display font-semibold">Aligned scheduling</h2>
+            <span class="text-xs text-slate-400 ml-1">P2 — feedback cycles aligned to decision timelines</span>
+          </div>
+          <p class="text-sm text-slate-500 mb-4">Schedule recurring survey cycles to land just before the reviews where you'll need the data.</p>
+          <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><i data-lucide="repeat" class="w-4 h-4"></i></div>
+              <div>
+                <p class="text-sm font-semibold">Quarterly checkout pulse</p>
+                <p class="text-xs text-slate-400">Repeats every 12 weeks · next run lands 5 days before the Q3 product review</p>
+              </div>
+            </div>
+            <button onclick="this.querySelector('span').classList.toggle('translate-x-5'); this.classList.toggle('bg-indigo-600'); this.classList.toggle('bg-slate-200')" class="relative w-11 h-6 rounded-full bg-indigo-600 transition-base shrink-0"><span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-base translate-x-5"></span></button>
+          </div>
+        </section>
+
+        <!-- Plan -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="credit-card" class="w-4 h-4 text-indigo-500"></i>
+            <h2 class="font-display font-semibold">Plan &amp; usage</h2>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+            <div>
+              <span class="ai-badge">Growth · $299/mo</span>
+              <p class="text-sm text-slate-600 mt-2 max-w-sm">2,500 responses/mo · adaptive surveys · A/B testing · trend forecasting</p>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Responses this month</span><span class="font-semibold text-slate-700">1,896 / 2,500</span></div>
+              <div class="h-2.5 rounded-full bg-slate-100"><div class="h-full rounded-full bg-indigo-500" style="width:76%"></div></div>
+            </div>
+            <button onclick="SurveAI.toast('Opening plan comparison — Business tier unlocks 10,000 responses/mo and API access.', 'info')" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 whitespace-nowrap">Compare plans →</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Approval modal -->
+  <div id="approval-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-900/40" onclick="SurveAI.closeModal('approval-modal')"></div>
+    <div data-modal-panel class="relative bg-white rounded-2xl card-shadow max-w-md w-full p-6 transition-base opacity-0 scale-95">
+      <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4"><i data-lucide="send" class="w-6 h-6"></i></div>
+      <h3 class="font-display font-bold text-lg">Send for PM approval?</h3>
+      <p class="text-sm text-slate-500 mt-2 leading-relaxed">Changing the screening confidence threshold affects data-quality policy platform-wide. This request — and your justification — will be logged to the audit trail and routed to <strong>Priya Nandakumar (PM)</strong> for sign-off before it takes effect.</p>
+      <label class="block text-sm font-medium text-slate-700 mt-4 mb-1.5">Reason for this change</label>
+      <input type="text" placeholder="e.g. Pilot data shows current threshold is too conservative for voice transcripts" class="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-indigo-400 outline-none mb-4" />
+      <div class="flex items-center gap-3">
+        <button onclick="SurveAI.closeModal('approval-modal')" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-base">Cancel</button>
+        <button onclick="SurveAI.closeModal('approval-modal'); SurveAI.toast('Sent for PM approval — you\\'ll be notified once reviewed.', 'success')" class="flex-1 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-base">Send for approval</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    const accessColor = { Admin: 'bg-indigo-50 text-indigo-700', Editor: 'bg-cyan-50 text-cyan-700', Analyst: 'bg-emerald-50 text-emerald-700', Viewer: 'bg-slate-100 text-slate-600' };
+    const tbody = document.getElementById('team-table');
+    SurveAI.data.team.forEach(m => {
+      const initials = m.name.split(' ').map(n => n[0]).join('');
+      const tr = document.createElement('tr');
+      tr.className = 'border-b border-slate-50';
+      tr.innerHTML = `
+        <td class="py-3"><div class="flex items-center gap-2.5"><span class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">${initials}</span><span class="font-medium">${m.name}</span></div></td>
+        <td class="py-3 text-slate-500">${m.role}</td>
+        <td class="py-3"><span class="text-xs font-semibold px-2.5 py-1 rounded-full ${accessColor[m.access]}">${m.access}</span></td>
+        <td class="py-3 text-slate-400">${m.email}</td>
+        <td class="py-3 text-right"><button onclick="SurveAI.toast('Opening access settings for ${m.name}…')" class="text-slate-300 hover:text-slate-500"><i data-lucide="more-horizontal" class="w-4 h-4"></i></button></td>`;
+      tbody.appendChild(tr);
+    });
+    SurveAI.initIcons();
+  </script>
+</body>
+</html>

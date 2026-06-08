@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Survey — Brightline Retail Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen">
+
+  <!-- Phone-frame layout: full width on mobile, centered card on larger screens -->
+  <div class="min-h-screen flex items-center justify-center py-8 px-4">
+    <div class="w-full max-w-sm bg-white rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden flex flex-col" style="min-height: 700px;">
+
+      <!-- Status bar / brand strip -->
+      <div class="px-6 pt-6 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i></div>
+          <span class="text-sm font-semibold text-slate-500">Brightline Retail Co. <span class="text-slate-300">via</span> Surve.AI</span>
+        </div>
+        <div class="mt-3 h-1.5 rounded-full bg-slate-100 overflow-hidden">
+          <div id="progress-bar" class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400 transition-base" style="width: 33%"></div>
+        </div>
+        <p class="text-xs text-slate-400 mt-1.5" id="progress-label">Question 1 of ~4 · usually takes 3 minutes</p>
+      </div>
+
+      <!-- Question area -->
+      <div class="flex-1 px-6 py-6 flex flex-col" id="survey-stage"></div>
+
+      <!-- footer -->
+      <div class="px-6 pb-6">
+        <p class="text-[11px] text-center text-slate-300">Your responses are confidential and anonymised · GDPR-compliant · <a href="../index.html" class="underline hover:text-slate-400">mockup hub</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    const stage = document.getElementById('survey-stage');
+    const progressBar = document.getElementById('progress-bar');
+    const progressLabel = document.getElementById('progress-label');
+    let step = 0;
+
+    // Base questions, then an adaptive follow-up is generated live based on the answer to Q2
+    const baseQuestions = [
+      { type: 'rating', text: 'How satisfied were you with your delivery time on your most recent order?' },
+      { type: 'open', text: 'Walk us through anything that felt frustrating during checkout — what happened, step by step?' },
+    ];
+
+    function renderRating(q) {
+      stage.innerHTML = `
+        <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2">Rate from 1 (poor) to 5 (excellent)</p>
+        <h2 class="font-display text-xl font-bold leading-snug mb-6">${q.text}</h2>
+        <div class="flex justify-between gap-2 mb-auto">
+          ${[1,2,3,4,5].map(n => `<button data-val="${n}" class="rate-btn flex-1 aspect-square rounded-2xl border-2 border-slate-200 font-display font-bold text-lg text-slate-400 hover:border-indigo-300 hover:text-indigo-500 transition-base">${n}</button>`).join('')}
+        </div>
+        <div class="flex justify-between text-[11px] text-slate-400 mt-2 px-1"><span>Poor</span><span>Excellent</span></div>
+      `;
+      stage.querySelectorAll('.rate-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          stage.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('border-indigo-500', 'bg-indigo-50', 'text-indigo-600'));
+          btn.classList.add('border-indigo-500', 'bg-indigo-50', 'text-indigo-600');
+          setTimeout(() => advance({ q: q.text, a: `${btn.dataset.val} / 5` }), 350);
+        });
+      });
+    }
+
+    function renderOpen(q, placeholder) {
+      stage.innerHTML = `
+        <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2">In your own words</p>
+        <h2 class="font-display text-xl font-bold leading-snug mb-4">${q.text}</h2>
+        <textarea id="open-answer" rows="5" placeholder="${placeholder}" class="w-full resize-none rounded-2xl border border-slate-200 px-4 py-3 text-sm focus:border-indigo-400 outline-none transition-base mb-auto"></textarea>
+        <button id="open-submit" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 disabled:text-slate-400 text-white font-semibold py-3 rounded-2xl transition-base flex items-center justify-center gap-2" disabled>
+          Continue <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>`;
+      const ta = stage.querySelector('#open-answer');
+      const btn = stage.querySelector('#open-submit');
+      ta.addEventListener('input', () => { btn.disabled = ta.value.trim().length < 8; });
+      btn.addEventListener('click', () => advance({ q: q.text, a: ta.value.trim() }));
+      SurveAI.initIcons();
+    }
+
+    function renderGenerating(basedOn) {
+      stage.innerHTML = `
+        <div class="flex-1 flex flex-col items-center justify-center text-center gap-4 py-10">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white animate-pulse">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="font-display font-semibold">Surve.AI is listening…</p>
+            <p class="text-sm text-slate-400 mt-1 max-w-[15rem] mx-auto leading-relaxed">Crafting a follow-up based on what you just shared — this usually takes under 2 seconds.</p>
+          </div>
+          <div class="flex gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-indigo-400 skeleton" style="animation-delay:0s"></span>
+            <span class="w-2 h-2 rounded-full bg-indigo-400 skeleton" style="animation-delay:.15s"></span>
+            <span class="w-2 h-2 rounded-full bg-indigo-400 skeleton" style="animation-delay:.3s"></span>
+          </div>
+        </div>`;
+      SurveAI.initIcons();
+    }
+
+    function renderFollowUp(basedOnAnswer) {
+      const q = { type: 'open', text: 'You mentioned trouble applying a code at checkout — what were you trying to redeem, and at what point did it stop working?' };
+      stage.innerHTML = `
+        <div class="ai-badge mb-3 self-start"><i data-lucide="sparkles" class="w-3 h-3"></i> Generated just for you</div>
+        <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2">A quick follow-up</p>
+        <h2 class="font-display text-xl font-bold leading-snug mb-4">${q.text}</h2>
+        <textarea id="open-answer" rows="5" placeholder="Take your time — every detail helps us fix it…" class="w-full resize-none rounded-2xl border border-slate-200 px-4 py-3 text-sm focus:border-indigo-400 outline-none transition-base mb-auto"></textarea>
+        <button id="open-submit" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 disabled:text-slate-400 text-white font-semibold py-3 rounded-2xl transition-base flex items-center justify-center gap-2" disabled>
+          Continue <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>`;
+      const ta = stage.querySelector('#open-answer');
+      const btn = stage.querySelector('#open-submit');
+      ta.addEventListener('input', () => { btn.disabled = ta.value.trim().length < 8; });
+      btn.addEventListener('click', () => advance({ q: q.text, a: ta.value.trim(), adaptive: true }));
+      SurveAI.initIcons();
+    }
+
+    function renderFinalRating() {
+      const q = { text: 'Overall, how likely are you to shop with Brightline again?' };
+      stage.innerHTML = `
+        <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2">Last one — rate from 1 (not likely) to 5 (very likely)</p>
+        <h2 class="font-display text-xl font-bold leading-snug mb-6">${q.text}</h2>
+        <div class="flex justify-between gap-2 mb-auto">
+          ${[1,2,3,4,5].map(n => `<button data-val="${n}" class="rate-btn flex-1 aspect-square rounded-2xl border-2 border-slate-200 font-display font-bold text-lg text-slate-400 hover:border-indigo-300 hover:text-indigo-500 transition-base">${n}</button>`).join('')}
+        </div>
+        <div class="flex justify-between text-[11px] text-slate-400 mt-2 px-1"><span>Not likely</span><span>Very likely</span></div>
+      `;
+      stage.querySelectorAll('.rate-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          stage.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('border-indigo-500', 'bg-indigo-50', 'text-indigo-600'));
+          btn.classList.add('border-indigo-500', 'bg-indigo-50', 'text-indigo-600');
+          setTimeout(() => { window.location.href = '12-survey-complete.html'; }, 450);
+        });
+      });
+    }
+
+    function advance(answer) {
+      step++;
+      if (step === 1) {
+        progressBar.style.width = '50%';
+        progressLabel.textContent = 'Question 2 of ~4 · adapting as you go';
+        renderOpen(baseQuestions[1], 'e.g. "I tried to use a discount code and it kept saying invalid…"');
+      } else if (step === 2) {
+        progressBar.style.width = '66%';
+        progressLabel.textContent = 'Surve.AI is generating your next question…';
+        renderGenerating(answer);
+        setTimeout(() => {
+          progressLabel.textContent = 'Question 3 of ~4 · this one is just for you';
+          renderFollowUp(answer);
+        }, 1700);
+      } else if (step === 3) {
+        progressBar.style.width = '85%';
+        progressLabel.textContent = 'Question 4 of ~4 · almost there';
+        renderFinalRating();
+      }
+    }
+
+    renderRating(baseQuestions[0]);
+    SurveAI.initIcons();
+  </script>
+</body>
+</html>

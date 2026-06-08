@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign in — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+
+  <div class="min-h-screen grid lg:grid-cols-2">
+    <!-- Left: brand panel -->
+    <div class="hidden lg:flex flex-col justify-between bg-gradient-to-br from-indigo-600 via-indigo-600 to-cyan-500 text-white p-12 relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-white/10"></div>
+      <div class="absolute -bottom-32 -left-10 w-72 h-72 rounded-full bg-white/10"></div>
+      <div class="relative flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center">
+          <i data-lucide="sparkles" class="w-5 h-5"></i>
+        </div>
+        <span class="font-display font-bold text-lg tracking-tight">Surve.AI</span>
+      </div>
+      <div class="relative max-w-md">
+        <p class="font-display text-3xl font-bold leading-snug">"I would like to get them into a zone where I actually go deep into what the real issue is."</p>
+        <p class="mt-4 text-indigo-100 text-sm">— from Surve.AI user research, validating the need for adaptive, AI-generated follow-up questions over static survey branching.</p>
+      </div>
+      <div class="relative flex items-center gap-8 text-sm text-indigo-100">
+        <div><span class="block font-display text-xl font-bold text-white">80%</span> faster analysis</div>
+        <div><span class="block font-display text-xl font-bold text-white">2,143</span> responses this cycle</div>
+        <div><span class="block font-display text-xl font-bold text-white">≥95%</span> screening precision</div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="flex items-center justify-center p-6 sm:p-12">
+      <div class="w-full max-w-sm">
+        <div class="lg:hidden flex items-center gap-2.5 mb-10">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <span class="font-display font-bold text-lg tracking-tight">Surve.AI</span>
+        </div>
+
+        <h1 class="font-display text-2xl font-bold tracking-tight">Welcome back</h1>
+        <p class="text-slate-500 mt-1.5 text-sm">Sign in to Brightline Retail Co.'s Surve.AI workspace.</p>
+
+        <form class="mt-8 space-y-4" onsubmit="event.preventDefault(); window.location.href='02-dashboard.html';">
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">Work email</label>
+            <div class="relative">
+              <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input id="email" type="email" required value="priya.n@brightline.co" class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-indigo-400 outline-none transition-base" />
+            </div>
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
+            <div class="relative">
+              <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input id="password" type="password" required value="••••••••••" class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-indigo-400 outline-none transition-base" />
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center gap-2 text-slate-600">
+              <input type="checkbox" checked class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-400" /> Keep me signed in
+            </label>
+            <a href="#" class="text-indigo-600 font-medium hover:text-indigo-700">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl shadow-sm shadow-indigo-200 transition-base flex items-center justify-center gap-2">
+            Sign in <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <div class="mt-6">
+          <p class="text-xs uppercase tracking-wide text-slate-400 mb-2.5">Or continue as</p>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button onclick="SurveAI.toast('Signed in as CX Director — Marcus Webb', 'info'); setTimeout(()=>location.href='02-dashboard.html', 500)" class="flex items-center gap-2 justify-center text-sm font-medium border border-slate-200 rounded-xl py-2.5 hover:border-indigo-300 hover:bg-indigo-50/50 transition-base">
+              <i data-lucide="shield-check" class="w-4 h-4 text-slate-400"></i> CX Director
+            </button>
+            <button onclick="SurveAI.toast('Signed in as Analyst — Aisha Rahman', 'info'); setTimeout(()=>location.href='02-dashboard.html', 500)" class="flex items-center gap-2 justify-center text-sm font-medium border border-slate-200 rounded-xl py-2.5 hover:border-indigo-300 hover:bg-indigo-50/50 transition-base">
+              <i data-lucide="bar-chart-3" class="w-4 h-4 text-slate-400"></i> Analyst
+            </button>
+          </div>
+        </div>
+
+        <p class="text-center text-sm text-slate-500 mt-8">
+          New to Surve.AI? <a href="#" onclick="SurveAI.toast('Pilot signup is white-glove — your CSM will reach out within 1 business day.')" class="text-indigo-600 font-semibold hover:text-indigo-700">Join the Q3 pilot</a>
+        </p>
+        <p class="text-center text-xs text-slate-400 mt-10">
+          <a href="../index.html" class="hover:text-slate-600">&larr; Back to mockup hub</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+</body>
+</html>

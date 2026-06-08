@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Survey Builder — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <div class="flex min-h-screen">
+    <!-- ===== Sidebar ===== -->
+    <aside id="mobile-nav" class="fixed lg:static inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col z-40 -translate-x-full lg:translate-x-0 transition-base">
+      <div class="h-16 flex items-center gap-2.5 px-5 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </div>
+        <span class="font-display font-bold tracking-tight">Surve.AI</span>
+        <button onclick="SurveAI.toggleMobileNav()" class="ml-auto lg:hidden text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5 text-sm">
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-1">Workspace</p>
+        <a href="02-dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+        <a href="03-survey-builder.html" class="flex items-center gap-3 px-3 py-2 rounded-lg font-medium bg-indigo-50 text-indigo-700"><i data-lucide="message-square-text" class="w-4 h-4"></i> Survey builder</a>
+        <a href="04-deploy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="rocket" class="w-4 h-4"></i> Deploy &amp; recruit</a>
+        <a href="05-live-monitor.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="activity" class="w-4 h-4"></i> Live monitor</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Insights</p>
+        <a href="06-insights.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layers" class="w-4 h-4"></i> Insights dashboard</a>
+        <a href="07-improvement.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="wand-2" class="w-4 h-4"></i> Auto-improvement</a>
+        <a href="08-forecasting.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Team</p>
+        <a href="09-collaboration.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="users" class="w-4 h-4"></i> Collaboration</a>
+        <a href="10-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="settings" class="w-4 h-4"></i> Settings</a>
+      </nav>
+      <div class="border-t border-slate-200 p-3">
+        <a href="../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-50 text-sm transition-base mb-1"><i data-lucide="grid-2x2" class="w-4 h-4"></i> Mockup hub</a>
+        <div class="flex items-center gap-3 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">PN</div>
+          <div class="leading-tight"><p class="text-sm font-semibold">Priya Nandakumar</p><p class="text-xs text-slate-400">Product Manager</p></div>
+        </div>
+      </div>
+    </aside>
+    <div id="mobile-nav-overlay" onclick="SurveAI.toggleMobileNav()" class="hidden fixed inset-0 bg-slate-900/30 z-30 lg:hidden"></div>
+
+    <!-- ===== Main ===== -->
+    <div class="flex-1 min-w-0 flex flex-col">
+      <header class="h-16 bg-white/80 backdrop-blur border-b border-slate-200 flex items-center gap-4 px-5 sticky top-0 z-20">
+        <button onclick="SurveAI.toggleMobileNav()" class="lg:hidden text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-tight">AI survey builder</h1>
+          <p class="text-xs text-slate-400">Describe what you want to learn — Surve.AI drafts the survey · FR10</p>
+        </div>
+        <span class="ai-badge ml-auto hidden sm:inline-flex"><i data-lucide="sparkles" class="w-3 h-3"></i> Generation &lt; 2s per turn</span>
+      </header>
+
+      <main class="flex-1 grid lg:grid-cols-[1fr_420px] min-h-0">
+        <!-- Chat pane -->
+        <section class="flex flex-col min-h-0 border-r border-slate-200">
+          <div id="chat-thread" class="flex-1 overflow-y-auto p-6 space-y-5 max-w-2xl w-full mx-auto">
+            <!-- seeded conversation -->
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white shrink-0"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+              <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed card-shadow max-w-md">
+                Hi Priya 👋 — tell me what you want to learn and who from, and I'll draft a question set you can edit before it goes live. For example: <em>"Find out why checkout abandonment rose last month, for shoppers who didn't complete a purchase."</em>
+              </div>
+            </div>
+            <div class="flex gap-3 justify-end">
+              <div class="bg-indigo-600 text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed max-w-md">
+                I need to understand why customers are unhappy with delivery and checkout after the Q2 promo — mid-market retail shoppers who completed an order in the last 30 days. Keep it short, 4–6 questions, mix of rating and open-ended.
+              </div>
+              <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold shrink-0">PN</div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white shrink-0"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+              <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed card-shadow max-w-md">
+                Got it — drafted <strong>"Q3 Checkout &amp; Delivery Pulse"</strong>: 5 questions (2 rating, 3 open-ended), targeting recent purchasers via web + voice. I randomly rotate 4 of these per respondent per FR-spec, and adapt follow-ups live based on what they say. Review the draft on the right — edit, reorder, or ask me to regenerate any question →
+              </div>
+            </div>
+          </div>
+
+          <!-- Composer -->
+          <div class="border-t border-slate-200 p-4">
+            <div class="max-w-2xl mx-auto">
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <button onclick="SurveAI.toast('Regenerating question 3 with a sharper focus on payment friction…', 'info')" class="text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600 transition-base">Regenerate Q3 — more specific</button>
+                <button onclick="SurveAI.toast('Tone adjusted to be warmer and more conversational across all questions.', 'info')" class="text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600 transition-base">Make tone warmer</button>
+                <button onclick="SurveAI.toast('Added one more open-ended question about packaging — now 6 total.', 'info')" class="text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600 transition-base">Add a question about packaging</button>
+              </div>
+              <form class="flex items-end gap-2" onsubmit="event.preventDefault(); document.getElementById('composer').value=''; SurveAI.toast('Surve.AI is updating the draft based on your message…', 'info');">
+                <textarea id="composer" rows="1" placeholder="Ask Surve.AI to adjust tone, add or remove questions, change channels…" class="flex-1 resize-none rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-indigo-400 outline-none transition-base"></textarea>
+                <button type="submit" class="w-10 h-10 shrink-0 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center transition-base"><i data-lucide="send" class="w-4 h-4"></i></button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- Draft preview pane -->
+        <aside class="bg-white flex flex-col min-h-0">
+          <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-wide text-slate-400 font-semibold">Draft survey</p>
+              <h2 class="font-display font-semibold mt-0.5">Q3 Checkout &amp; Delivery Pulse</h2>
+            </div>
+            <span class="ai-badge"><i data-lucide="sparkles" class="w-3 h-3"></i> AI generated</span>
+          </div>
+          <div class="flex-1 overflow-y-auto p-5 space-y-3" id="question-list"></div>
+          <div class="p-5 border-t border-slate-100 bg-slate-50/60">
+            <div class="flex items-center justify-between text-sm text-slate-500 mb-3">
+              <span class="flex items-center gap-1.5"><i data-lucide="shuffle" class="w-3.5 h-3.5"></i> 4 of 6 questions shown per respondent (randomised)</span>
+            </div>
+            <a href="04-deploy.html" class="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl shadow-sm shadow-indigo-200 transition-base">
+              Looks good — continue to deploy <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </aside>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    const questions = [
+      { type: 'Rating · 1–5', icon: 'star', text: 'How satisfied were you with your delivery time on your most recent order?' },
+      { type: 'Open-ended', icon: 'message-circle', text: 'Walk us through anything that felt frustrating during checkout — what happened, step by step?' },
+      { type: 'Rating · 1–5', icon: 'star', text: 'How easy was it to apply a discount code or gift card at checkout?' },
+      { type: 'Open-ended', icon: 'message-circle', text: 'If your delivery didn’t go as expected, what would have made it better?' },
+      { type: 'Multiple choice', icon: 'list', text: 'Which best describes how you tracked your order — app notification, email, carrier site, or you didn’t track it?' },
+      { type: 'Open-ended', icon: 'message-circle', text: 'Anything else about your recent purchase you want us to know?' },
+    ];
+    const list = document.getElementById('question-list');
+    questions.forEach((q, i) => {
+      const card = document.createElement('div');
+      card.className = 'group border border-slate-200 rounded-xl p-4 hover:border-indigo-300 transition-base';
+      card.innerHTML = `
+        <div class="flex items-start gap-3">
+          <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-xs font-bold">${i + 1}</span>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-slate-400"><i data-lucide="${q.icon}" class="w-3 h-3"></i>${q.type}</span>
+            </div>
+            <p class="text-sm text-slate-700 leading-snug" contenteditable="true" spellcheck="false">${q.text}</p>
+          </div>
+          <div class="opacity-0 group-hover:opacity-100 transition-base flex items-center gap-1 shrink-0">
+            <button title="Regenerate" onclick="SurveAI.toast('Regenerating question ${i + 1}…', 'info')" class="w-7 h-7 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-400"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i></button>
+            <button title="Remove" onclick="this.closest('.group').remove(); SurveAI.toast('Question removed from the draft.')" class="w-7 h-7 rounded-lg hover:bg-rose-50 flex items-center justify-center text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+          </div>
+        </div>`;
+      list.appendChild(card);
+    });
+    SurveAI.initIcons();
+  </script>
+</body>
+</html>

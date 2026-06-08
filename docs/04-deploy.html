@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deploy &amp; Recruit — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <div class="flex min-h-screen">
+    <!-- ===== Sidebar ===== -->
+    <aside id="mobile-nav" class="fixed lg:static inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col z-40 -translate-x-full lg:translate-x-0 transition-base">
+      <div class="h-16 flex items-center gap-2.5 px-5 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+        <span class="font-display font-bold tracking-tight">Surve.AI</span>
+        <button onclick="SurveAI.toggleMobileNav()" class="ml-auto lg:hidden text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5 text-sm">
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-1">Workspace</p>
+        <a href="02-dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+        <a href="03-survey-builder.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="message-square-text" class="w-4 h-4"></i> Survey builder</a>
+        <a href="04-deploy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg font-medium bg-indigo-50 text-indigo-700"><i data-lucide="rocket" class="w-4 h-4"></i> Deploy &amp; recruit</a>
+        <a href="05-live-monitor.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="activity" class="w-4 h-4"></i> Live monitor</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Insights</p>
+        <a href="06-insights.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layers" class="w-4 h-4"></i> Insights dashboard</a>
+        <a href="07-improvement.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="wand-2" class="w-4 h-4"></i> Auto-improvement</a>
+        <a href="08-forecasting.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Team</p>
+        <a href="09-collaboration.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="users" class="w-4 h-4"></i> Collaboration</a>
+        <a href="10-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="settings" class="w-4 h-4"></i> Settings</a>
+      </nav>
+      <div class="border-t border-slate-200 p-3">
+        <a href="../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-50 text-sm transition-base mb-1"><i data-lucide="grid-2x2" class="w-4 h-4"></i> Mockup hub</a>
+        <div class="flex items-center gap-3 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">PN</div>
+          <div class="leading-tight"><p class="text-sm font-semibold">Priya Nandakumar</p><p class="text-xs text-slate-400">Product Manager</p></div>
+        </div>
+      </div>
+    </aside>
+    <div id="mobile-nav-overlay" onclick="SurveAI.toggleMobileNav()" class="hidden fixed inset-0 bg-slate-900/30 z-30 lg:hidden"></div>
+
+    <div class="flex-1 min-w-0">
+      <header class="h-16 bg-white/80 backdrop-blur border-b border-slate-200 flex items-center gap-4 px-5 sticky top-0 z-20">
+        <button onclick="SurveAI.toggleMobileNav()" class="lg:hidden text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-tight">Deploy &amp; recruit</h1>
+          <p class="text-xs text-slate-400">"Q3 Checkout &amp; Delivery Pulse" · step 2 of 2 before launch</p>
+        </div>
+        <a href="03-survey-builder.html" class="ml-auto text-sm text-slate-500 hover:text-indigo-600 flex items-center gap-1.5"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to draft</a>
+      </header>
+
+      <main class="p-5 sm:p-8 max-w-5xl mx-auto space-y-6">
+
+        <!-- Channels -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center gap-2 mb-1">
+            <i data-lucide="radio-tower" class="w-4 h-4 text-indigo-500"></i>
+            <h2 class="font-display font-semibold">Channels</h2>
+            <span class="text-xs text-slate-400 ml-1">FR1 — at least 2 channels required</span>
+          </div>
+          <p class="text-sm text-slate-500 mb-4">Choose how respondents receive and complete this survey. Mixing channels widens reach across customer segments.</p>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <label class="flex items-start gap-3 border-2 border-indigo-300 bg-indigo-50/50 rounded-xl p-4 cursor-pointer transition-base">
+              <input type="checkbox" checked class="mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-400" />
+              <span>
+                <span class="flex items-center gap-2 font-semibold text-sm"><i data-lucide="monitor" class="w-4 h-4 text-indigo-500"></i> Web survey</span>
+                <span class="block text-xs text-slate-500 mt-0.5">Embedded form + emailed link · adaptive follow-ups rendered live in-browser</span>
+              </span>
+            </label>
+            <label class="flex items-start gap-3 border-2 border-indigo-300 bg-indigo-50/50 rounded-xl p-4 cursor-pointer transition-base">
+              <input type="checkbox" checked class="mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-400" />
+              <span>
+                <span class="flex items-center gap-2 font-semibold text-sm"><i data-lucide="phone-call" class="w-4 h-4 text-indigo-500"></i> Interactive voice (IVR)</span>
+                <span class="block text-xs text-slate-500 mt-0.5">Phone-based survey · ASR transcription feeds the same NLP analysis pipeline</span>
+              </span>
+            </label>
+            <label class="flex items-start gap-3 border border-slate-200 rounded-xl p-4 cursor-pointer transition-base hover:border-slate-300 opacity-60">
+              <input type="checkbox" disabled class="mt-1 rounded border-slate-300" />
+              <span>
+                <span class="flex items-center gap-2 font-semibold text-sm text-slate-500"><i data-lucide="smartphone" class="w-4 h-4"></i> Native mobile app</span>
+                <span class="block text-xs text-slate-400 mt-0.5">Phase 2 — out of scope for MVP per PRD §3.4</span>
+              </span>
+            </label>
+            <label class="flex items-start gap-3 border border-slate-200 rounded-xl p-4 cursor-pointer transition-base hover:border-slate-300 opacity-60">
+              <input type="checkbox" disabled class="mt-1 rounded border-slate-300" />
+              <span>
+                <span class="flex items-center gap-2 font-semibold text-sm text-slate-500"><i data-lucide="share-2" class="w-4 h-4"></i> Social / review signals</span>
+                <span class="block text-xs text-slate-400 mt-0.5">Phase 3 — listening pipeline not yet built</span>
+              </span>
+            </label>
+          </div>
+        </section>
+
+        <!-- Screening -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center gap-2 mb-1">
+            <i data-lucide="filter" class="w-4 h-4 text-indigo-500"></i>
+            <h2 class="font-display font-semibold">Screening pre-qualifiers</h2>
+            <span class="text-xs text-slate-400 ml-1">FR3 — automatic invalid-response filtering</span>
+          </div>
+          <p class="text-sm text-slate-500 mb-4">Surve.AI screens out low-quality responses automatically. Borderline cases (&lt;70% confidence) are flagged for your manual review rather than auto-excluded.</p>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200">
+              <div>
+                <p class="text-sm font-medium">Filter straight-line answer patterns</p>
+                <p class="text-xs text-slate-400">Detects identical ratings across unrelated questions</p>
+              </div>
+              <button onclick="this.querySelector('span').classList.toggle('translate-x-5'); this.classList.toggle('bg-indigo-600'); this.classList.toggle('bg-slate-200')" class="relative w-11 h-6 rounded-full bg-indigo-600 transition-base shrink-0"><span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-base translate-x-5"></span></button>
+            </div>
+            <div class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200">
+              <div>
+                <p class="text-sm font-medium">Flag implausibly fast completions</p>
+                <p class="text-xs text-slate-400">Median completion is 4m 10s — flag anything under 20 seconds</p>
+              </div>
+              <button onclick="this.querySelector('span').classList.toggle('translate-x-5'); this.classList.toggle('bg-indigo-600'); this.classList.toggle('bg-slate-200')" class="relative w-11 h-6 rounded-full bg-indigo-600 transition-base shrink-0"><span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-base translate-x-5"></span></button>
+            </div>
+            <div class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200">
+              <div>
+                <p class="text-sm font-medium">Detect contradictory open-text answers</p>
+                <p class="text-xs text-slate-400">e.g. "loved the delivery" alongside a 1-star delivery rating</p>
+              </div>
+              <button onclick="this.querySelector('span').classList.toggle('translate-x-5'); this.classList.toggle('bg-indigo-600'); this.classList.toggle('bg-slate-200')" class="relative w-11 h-6 rounded-full bg-indigo-600 transition-base shrink-0"><span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-base translate-x-5"></span></button>
+            </div>
+            <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/60 flex items-start gap-2.5">
+              <i data-lucide="lock" class="w-4 h-4 text-amber-500 mt-0.5 shrink-0"></i>
+              <p class="text-xs text-amber-700 leading-relaxed">Changing the underlying screening confidence threshold (currently 70%) requires PM approval and is managed in <a href="10-settings.html" class="font-semibold underline">Settings → Screening governance</a> per the PRD's autonomy boundaries.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recruitment & incentives -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center gap-2 mb-1">
+            <i data-lucide="gift" class="w-4 h-4 text-indigo-500"></i>
+            <h2 class="font-display font-semibold">Recruitment &amp; incentives</h2>
+            <span class="text-xs text-slate-400 ml-1">FR7 — voucher rewards &amp; referral tracking</span>
+          </div>
+          <p class="text-sm text-slate-500 mb-4">Recruit via your existing customer list, then let respondents refer peers — each completion in the chain earns a reward.</p>
+          <div class="grid sm:grid-cols-3 gap-3 mb-4">
+            <label class="flex items-center gap-2.5 border-2 border-indigo-300 bg-indigo-50/50 rounded-xl p-3.5 text-sm font-medium cursor-pointer">
+              <input type="checkbox" checked class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-400" /> <i data-lucide="mail" class="w-4 h-4 text-indigo-500"></i> Email list <span class="text-xs text-slate-400 ml-auto">12,400 contacts</span>
+            </label>
+            <label class="flex items-center gap-2.5 border-2 border-indigo-300 bg-indigo-50/50 rounded-xl p-3.5 text-sm font-medium cursor-pointer">
+              <input type="checkbox" checked class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-400" /> <i data-lucide="users" class="w-4 h-4 text-indigo-500"></i> Respondent panel <span class="text-xs text-slate-400 ml-auto">on request</span>
+            </label>
+            <label class="flex items-center gap-2.5 border-2 border-indigo-300 bg-indigo-50/50 rounded-xl p-3.5 text-sm font-medium cursor-pointer">
+              <input type="checkbox" checked class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-400" /> <i data-lucide="git-branch" class="w-4 h-4 text-indigo-500"></i> Peer referral chain <span class="text-xs text-slate-400 ml-auto">incentivised</span>
+            </label>
+          </div>
+          <div class="rounded-xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center"><i data-lucide="ticket" class="w-5 h-5"></i></div>
+              <div>
+                <p class="text-sm font-semibold">Reward per completed response</p>
+                <p class="text-xs text-slate-400">Amazon e-gift voucher · auto-issued on valid completion · ESOMAR-aligned</p>
+              </div>
+            </div>
+            <div class="sm:ml-auto flex items-center gap-2">
+              <span class="text-sm text-slate-500">Voucher value</span>
+              <select class="text-sm font-semibold border border-slate-200 rounded-lg px-3 py-1.5 focus:border-indigo-400 outline-none">
+                <option>$5 USD</option>
+                <option selected>$10 USD</option>
+                <option>$15 USD</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Review & launch -->
+        <section class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="clipboard-check" class="w-4 h-4 text-indigo-500"></i>
+            <h2 class="font-display font-semibold">Review &amp; launch</h2>
+          </div>
+          <div class="grid sm:grid-cols-3 gap-4 text-sm mb-5">
+            <div class="rounded-xl bg-slate-50 p-4">
+              <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Question rotation</p>
+              <p class="font-medium">4 of 6 questions shown per respondent, randomly selected from the bank</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-4">
+              <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Adaptive depth</p>
+              <p class="font-medium">Up to 2 AI-generated follow-ups per respondent before fallback to pre-set questions</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-4">
+              <p class="text-xs text-slate-400 uppercase tracking-wide font-semibold mb-1">Target &amp; window</p>
+              <p class="font-medium">1,500 responses · closes in 14 days or at quota, whichever first</p>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-3">
+            <button onclick="SurveAI.openModal('launch-modal')" class="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-sm shadow-indigo-200 transition-base">
+              <i data-lucide="rocket" class="w-4 h-4"></i> Launch survey now
+            </button>
+            <button onclick="SurveAI.toast('Saved as draft — find it anytime in your survey list.')" class="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-base">Save as draft</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Launch confirmation modal -->
+  <div id="launch-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-900/40" onclick="SurveAI.closeModal('launch-modal')"></div>
+    <div data-modal-panel class="relative bg-white rounded-2xl card-shadow max-w-md w-full p-6 transition-base opacity-0 scale-95">
+      <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4"><i data-lucide="rocket" class="w-6 h-6"></i></div>
+      <h3 class="font-display font-bold text-lg">Launch "Q3 Checkout &amp; Delivery Pulse"?</h3>
+      <p class="text-sm text-slate-500 mt-2 leading-relaxed">It will go out across <strong>Web</strong> and <strong>Interactive voice</strong> to 12,400 email contacts immediately, with screening and adaptive follow-ups active from the first response. You can pause it anytime from the live monitor.</p>
+      <div class="flex items-center gap-3 mt-6">
+        <button onclick="SurveAI.closeModal('launch-modal')" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-base">Not yet</button>
+        <button onclick="window.location.href='05-live-monitor.html'" class="flex-1 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-base">Launch now</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+</body>
+</html>

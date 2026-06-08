@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Insights Dashboard — Surve.AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <div class="flex min-h-screen">
+    <!-- ===== Sidebar ===== -->
+    <aside id="mobile-nav" class="fixed lg:static inset-y-0 left-0 w-64 bg-white border-r border-slate-200 flex flex-col z-40 -translate-x-full lg:translate-x-0 transition-base">
+      <div class="h-16 flex items-center gap-2.5 px-5 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-white"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+        <span class="font-display font-bold tracking-tight">Surve.AI</span>
+        <button onclick="SurveAI.toggleMobileNav()" class="ml-auto lg:hidden text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5 text-sm">
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-1">Workspace</p>
+        <a href="02-dashboard.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+        <a href="03-survey-builder.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="message-square-text" class="w-4 h-4"></i> Survey builder</a>
+        <a href="04-deploy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="rocket" class="w-4 h-4"></i> Deploy &amp; recruit</a>
+        <a href="05-live-monitor.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="activity" class="w-4 h-4"></i> Live monitor</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Insights</p>
+        <a href="06-insights.html" class="flex items-center gap-3 px-3 py-2 rounded-lg font-medium bg-indigo-50 text-indigo-700"><i data-lucide="layers" class="w-4 h-4"></i> Insights dashboard</a>
+        <a href="07-improvement.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="wand-2" class="w-4 h-4"></i> Auto-improvement</a>
+        <a href="08-forecasting.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting</a>
+        <p class="px-3 text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5 mt-5">Team</p>
+        <a href="09-collaboration.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="users" class="w-4 h-4"></i> Collaboration</a>
+        <a href="10-settings.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="settings" class="w-4 h-4"></i> Settings</a>
+      </nav>
+      <div class="border-t border-slate-200 p-3">
+        <a href="../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-50 text-sm transition-base mb-1"><i data-lucide="grid-2x2" class="w-4 h-4"></i> Mockup hub</a>
+        <div class="flex items-center gap-3 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">PN</div>
+          <div class="leading-tight"><p class="text-sm font-semibold">Priya Nandakumar</p><p class="text-xs text-slate-400">Product Manager</p></div>
+        </div>
+      </div>
+    </aside>
+    <div id="mobile-nav-overlay" onclick="SurveAI.toggleMobileNav()" class="hidden fixed inset-0 bg-slate-900/30 z-30 lg:hidden"></div>
+
+    <div class="flex-1 min-w-0">
+      <header class="h-16 bg-white/80 backdrop-blur border-b border-slate-200 flex items-center gap-4 px-5 sticky top-0 z-20">
+        <button onclick="SurveAI.toggleMobileNav()" class="lg:hidden text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <div class="min-w-0">
+          <h1 class="font-display font-bold text-lg leading-tight truncate">Post-Purchase NPS — Home Goods</h1>
+          <p class="text-xs text-slate-400 flex items-center gap-1.5"><i data-lucide="clock" class="w-3 h-3"></i> Synthesised 1h 42m after close · within the 2-hour SLA (FR2)</p>
+        </div>
+        <div class="ml-auto flex items-center gap-2">
+          <button onclick="SurveAI.toast('Generating PDF deck for Monday\\'s product review…', 'info')" class="flex items-center gap-2 text-sm font-medium border border-slate-200 px-3.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 transition-base"><i data-lucide="download" class="w-4 h-4"></i> <span class="hidden sm:inline">Export PDF</span></button>
+          <a href="09-collaboration.html" class="flex items-center gap-2 text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl shadow-sm shadow-indigo-200 transition-base"><i data-lucide="share-2" class="w-4 h-4"></i> Share</a>
+        </div>
+      </header>
+
+      <main class="p-5 sm:p-8 max-w-6xl mx-auto space-y-6">
+
+        <!-- Headline KPI row -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+            <p class="text-xs uppercase tracking-wide text-slate-400 font-semibold">Responses analysed</p>
+            <p class="font-display text-2xl font-bold mt-2">1,956 <span class="text-sm font-normal text-slate-400">/ 2,143</span></p>
+            <p class="text-xs text-slate-400 mt-1">187 excluded by screening · 96.2% precision</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+            <p class="text-xs uppercase tracking-wide text-slate-400 font-semibold">Net sentiment</p>
+            <p class="font-display text-2xl font-bold mt-2 text-amber-600">−8 <span class="text-sm font-normal text-slate-400">pts</span></p>
+            <p class="text-xs text-rose-600 mt-1 flex items-center gap-1"><i data-lucide="trending-down" class="w-3 h-3"></i> down 6 pts vs. last cycle</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+            <p class="text-xs uppercase tracking-wide text-slate-400 font-semibold">Top priority issue</p>
+            <p class="font-display text-lg font-bold mt-2 truncate">Shipping speed &amp; tracking</p>
+            <p class="text-xs text-slate-400 mt-1">412 mentions · trending up</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+            <p class="text-xs uppercase tracking-wide text-slate-400 font-semibold">Themes surfaced</p>
+            <p class="font-display text-2xl font-bold mt-2">6</p>
+            <p class="text-xs text-slate-400 mt-1">clustered from open-text + voice transcripts</p>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex items-center gap-1.5 border-b border-slate-200 overflow-x-auto" id="tabs">
+          <button data-tab="themes" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap">Themes &amp; sentiment</button>
+          <button data-tab="quant" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">Quant + qual synthesis</button>
+          <button data-tab="quality" class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">Data quality &amp; traceability</button>
+        </div>
+
+        <!-- TAB: Themes & sentiment -->
+        <div data-panel="themes" class="space-y-6">
+          <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 card-shadow">
+              <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+                <h2 class="font-display font-semibold flex items-center gap-2">Top themes <span class="ai-badge"><i data-lucide="sparkles" class="w-3 h-3"></i> AI clustered</span></h2>
+                <span class="text-xs text-slate-400">ranked by priority = frequency × sentiment severity</span>
+              </div>
+              <ul class="divide-y divide-slate-100" id="theme-list"></ul>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+                <h3 class="font-display font-semibold text-sm mb-4">Sentiment trend — 6 weeks</h3>
+                <div class="flex items-end gap-2 h-36" id="trend-chart"></div>
+                <div class="flex items-center gap-4 mt-3 text-xs text-slate-500">
+                  <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm dot-positive"></span>Positive</span>
+                  <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm dot-neutral"></span>Neutral</span>
+                  <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm dot-negative"></span>Negative</span>
+                </div>
+              </div>
+              <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-5">
+                <h3 class="font-display font-semibold text-sm mb-1">Priority issue matrix</h3>
+                <p class="text-xs text-slate-400 mb-4">Frequency (mentions) vs. sentiment severity</p>
+                <div class="relative h-44 border-l border-b border-slate-200 ml-2">
+                  <span class="absolute -left-2 -top-3 text-[10px] text-slate-400">High severity</span>
+                  <span class="absolute -left-2 bottom-0 translate-y-full text-[10px] text-slate-400 mt-1">Low severity</span>
+                  <span class="absolute right-0 bottom-0 translate-y-full text-[10px] text-slate-400 mt-1">High freq.</span>
+                  <div class="absolute w-3 h-3 rounded-full bg-rose-500 ring-4 ring-rose-100" style="left: 78%; top: 18%;" title="Shipping speed & tracking"></div>
+                  <div class="absolute w-2.5 h-2.5 rounded-full bg-rose-400 ring-4 ring-rose-100" style="left: 60%; top: 32%;" title="Checkout & payment friction"></div>
+                  <div class="absolute w-2 h-2 rounded-full bg-amber-400 ring-4 ring-amber-100" style="left: 48%; top: 52%;" title="Product quality vs. photos"></div>
+                  <div class="absolute w-2 h-2 rounded-full bg-amber-300 ring-4 ring-amber-100" style="left: 38%; top: 66%;" title="Customer support responsiveness"></div>
+                  <div class="absolute w-2 h-2 rounded-full bg-emerald-400 ring-4 ring-emerald-100" style="left: 30%; top: 80%;" title="Loyalty point redemption"></div>
+                  <div class="absolute w-2 h-2 rounded-full bg-emerald-400 ring-4 ring-emerald-100" style="left: 22%; top: 86%;" title="Packaging & unboxing feel"></div>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-3">Hover a dot for the theme name — top-right is your danger zone.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Quant + qual synthesis -->
+        <div data-panel="quant" class="hidden space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+            <div class="flex items-center gap-2 mb-1">
+              <h2 class="font-display font-semibold">Combined synthesis — Shipping speed &amp; tracking</h2>
+              <span class="ai-badge"><i data-lucide="sparkles" class="w-3 h-3"></i> AI synthesis</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-5">FR6 — every report pairs the numbers with the narrative behind them, in one place</p>
+            <div class="grid lg:grid-cols-2 gap-6">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">What customers said (quantitative)</p>
+                <div class="space-y-3">
+                  <div>
+                    <div class="flex justify-between text-sm mb-1"><span>Rated delivery 1–2 stars</span><span class="font-semibold">34%</span></div>
+                    <div class="h-2 rounded-full bg-slate-100"><div class="h-full rounded-full bg-rose-400" style="width:34%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-sm mb-1"><span>Mentioned "tracking" in open text</span><span class="font-semibold">28%</span></div>
+                    <div class="h-2 rounded-full bg-slate-100"><div class="h-full rounded-full bg-rose-400" style="width:28%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-sm mb-1"><span>Reported delivery later than promised</span><span class="font-semibold">41%</span></div>
+                    <div class="h-2 rounded-full bg-slate-100"><div class="h-full rounded-full bg-rose-400" style="width:41%"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3 flex items-center gap-2">What it means <span class="text-slate-300">·</span> AI synthesis (qualitative)</p>
+                <div class="bg-cyan-50/60 border border-cyan-100 rounded-xl p-4 text-sm text-slate-700 leading-relaxed">
+                  Customers aren't only frustrated by <em>slow</em> delivery — the bigger driver is <strong>broken expectations</strong>: tracking pages that freeze mid-transit and promised dates that quietly slip. Respondents who mentioned tracking issues were <strong>2.1× more likely</strong> to leave a 1–2 star rating than those who only mentioned slow speed. <span class="text-cyan-700 font-medium">Fixing tracking accuracy may move sentiment faster than fixing speed itself.</span>
+                </div>
+                <button onclick="SurveAI.toast('Opening source responses linked to this synthesis (FR13 traceability)…', 'info')" class="mt-3 text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1.5"><i data-lucide="link" class="w-3.5 h-3.5"></i> Trace this synthesis to 412 source responses</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+            <h2 class="font-display font-semibold mb-1">Verbatim examples</h2>
+            <p class="text-xs text-slate-400 mb-4">Real respondent quotes — every quote links back to its full, anonymised source response</p>
+            <div class="grid sm:grid-cols-2 gap-3" id="verbatim-list"></div>
+          </div>
+        </div>
+
+        <!-- TAB: Data quality & traceability -->
+        <div data-panel="quality" class="hidden space-y-6">
+          <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+              <div class="flex items-center gap-2 mb-1">
+                <h2 class="font-display font-semibold">Screening transparency</h2>
+                <span class="text-xs text-slate-400">Story 3 — trustworthy &amp; defensible to the C-suite</span>
+              </div>
+              <p class="text-sm text-slate-500 mb-5">187 of 2,143 raw responses (8.7%) were automatically excluded before analysis. Exclusion reasons and confidence scores are shown for full auditability — and you can override any exclusion.</p>
+              <div class="space-y-3">
+                <div class="flex items-center gap-2 text-sm bg-emerald-50 text-emerald-700 rounded-xl px-4 py-3">
+                  <i data-lucide="badge-check" class="w-4 h-4"></i> 96.2% screening precision on this run — above the ≥95% target, benchmarked against a 500-response human-labelled gold standard
+                </div>
+                <ul class="divide-y divide-slate-100 border border-slate-100 rounded-xl overflow-hidden" id="reasons-list"></ul>
+              </div>
+              <button onclick="SurveAI.openModal('override-modal')" class="mt-4 text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1.5"><i data-lucide="undo-2" class="w-4 h-4"></i> Review &amp; override excluded responses</button>
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 card-shadow p-6">
+              <h3 class="font-display font-semibold text-sm mb-4 flex items-center gap-2"><i data-lucide="link-2" class="w-4 h-4 text-indigo-500"></i> Traceability (FR13)</h3>
+              <p class="text-sm text-slate-500 leading-relaxed mb-4">Every theme, sentiment score and AI synthesis on this dashboard links back to the exact source responses it was derived from — so any insight can be independently verified.</p>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-50"><span class="text-slate-600">Theme clusters</span><span class="font-medium text-emerald-600 flex items-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> linked</span></div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-50"><span class="text-slate-600">Sentiment scores</span><span class="font-medium text-emerald-600 flex items-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> linked</span></div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-50"><span class="text-slate-600">AI synthesis statements</span><span class="font-medium text-emerald-600 flex items-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> linked</span></div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-50"><span class="text-slate-600">Excluded responses</span><span class="font-medium text-emerald-600 flex items-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> linked + overridable</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Override modal -->
+  <div id="override-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-900/40" onclick="SurveAI.closeModal('override-modal')"></div>
+    <div data-modal-panel class="relative bg-white rounded-2xl card-shadow max-w-lg w-full p-6 transition-base opacity-0 scale-95">
+      <h3 class="font-display font-bold text-lg mb-1">Excluded response #SRV-1038-1842</h3>
+      <p class="text-xs text-slate-400 mb-4">Flagged: contradictory answer pattern · screener confidence 71%</p>
+      <div class="bg-slate-50 rounded-xl p-4 text-sm text-slate-600 leading-relaxed mb-4">
+        "Delivery was perfect, arrived early, no complaints at all." — paired with a 1-star rating on the same delivery question. Manual reinstatement requires a logged reason and is recorded in the audit trail per the PRD's autonomy boundaries.
+      </div>
+      <label class="block text-sm font-medium text-slate-700 mb-1.5">Reason for override (required for audit trail)</label>
+      <input type="text" placeholder="e.g. Verified via support ticket #48213 — rating was a misclick" class="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:border-indigo-400 outline-none mb-4" />
+      <div class="flex items-center gap-3">
+        <button onclick="SurveAI.closeModal('override-modal')" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-base">Keep excluded</button>
+        <button onclick="SurveAI.closeModal('override-modal'); SurveAI.toast('Response reinstated — logged to audit trail with your reason.', 'success')" class="flex-1 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-base">Reinstate response</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('border-indigo-600', 'text-indigo-600'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('border-transparent', 'text-slate-500'));
+        btn.classList.add('border-indigo-600', 'text-indigo-600');
+        btn.classList.remove('border-transparent', 'text-slate-500');
+        document.querySelectorAll('[data-panel]').forEach(p => p.classList.add('hidden'));
+        document.querySelector(`[data-panel="${btn.dataset.tab}"]`).classList.remove('hidden');
+      });
+    });
+
+    // Theme list
+    const themeList = document.getElementById('theme-list');
+    SurveAI.data.themes.forEach(t => {
+      const sentColor = t.sentiment < -0.15 ? 'text-rose-600 dot-negative' : t.sentiment > 0.15 ? 'text-emerald-600 dot-positive' : 'text-amber-600 dot-neutral';
+      const trendIcon = t.trend === 'up' ? 'trending-up' : t.trend === 'down' ? 'trending-down' : 'minus';
+      const pct = Math.min(100, Math.round((t.mentions / 412) * 100));
+      const li = document.createElement('li');
+      li.className = 'p-5';
+      li.innerHTML = `
+        <div class="flex items-start gap-3">
+          <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">${t.priority}</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-3">
+              <p class="font-semibold text-slate-800">${t.name}</p>
+              <span class="text-xs text-slate-400 flex items-center gap-1 shrink-0"><i data-lucide="${trendIcon}" class="w-3.5 h-3.5"></i>${t.mentions} mentions</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-slate-100 mt-2 overflow-hidden"><div class="h-full rounded-full bg-indigo-400" style="width:${pct}%"></div></div>
+            <div class="flex items-center justify-between mt-2">
+              <span class="inline-flex items-center gap-1.5 text-xs font-medium ${sentColor.split(' ')[0]}"><span class="w-2 h-2 rounded-full ${sentColor.split(' ')[1]}"></span>${t.sentiment > 0 ? '+' : ''}${t.sentiment.toFixed(2)} sentiment</span>
+              <button class="text-xs font-medium text-indigo-600 hover:text-indigo-700" onclick="this.closest('li').querySelector('.quote-box').classList.toggle('hidden')">View quote</button>
+            </div>
+            <div class="quote-box hidden mt-3 text-sm text-slate-600 italic bg-slate-50 rounded-lg p-3 border-l-2 border-indigo-300">${t.quote}</div>
+          </div>
+        </div>`;
+      themeList.appendChild(li);
+    });
+
+    // Sentiment trend chart (simple stacked bars)
+    const chart = document.getElementById('trend-chart');
+    SurveAI.data.sentimentTrend.forEach(w => {
+      const col = document.createElement('div');
+      col.className = 'flex-1 flex flex-col items-center gap-1.5 group';
+      col.innerHTML = `
+        <div class="w-full flex flex-col-reverse rounded-md overflow-hidden h-28">
+          <div class="dot-negative transition-base group-hover:opacity-80" style="height:${w.negative}%"></div>
+          <div class="dot-neutral transition-base group-hover:opacity-80" style="height:${w.neutral}%"></div>
+          <div class="dot-positive transition-base group-hover:opacity-80" style="height:${w.positive}%"></div>
+        </div>
+        <span class="text-[10px] text-slate-400">${w.week}</span>`;
+      chart.appendChild(col);
+    });
+
+    // Verbatims (reuse theme quotes, tag with channel/date for realism)
+    const vlist = document.getElementById('verbatim-list');
+    const meta = [
+      { channel: 'Web', date: 'Jun 3', id: '1842' },
+      { channel: 'Voice (ASR)', date: 'Jun 4', id: '1907' },
+      { channel: 'Web', date: 'Jun 4', id: '1955' },
+      { channel: 'Web', date: 'Jun 5', id: '2031' },
+    ];
+    SurveAI.data.themes.slice(0, 4).forEach((t, i) => {
+      const m = meta[i];
+      const div = document.createElement('div');
+      div.className = 'border border-slate-200 rounded-xl p-4 text-sm';
+      div.innerHTML = `
+        <p class="text-slate-600 italic leading-relaxed">${t.quote}</p>
+        <div class="flex items-center justify-between mt-3 text-xs text-slate-400">
+          <span>${m.channel} · ${m.date} · #SRV-1038-${m.id}</span>
+          <span class="inline-flex items-center gap-1 font-medium text-indigo-600">${t.name}</span>
+        </div>`;
+      vlist.appendChild(div);
+    });
+
+    // Screening reasons
+    const rlist = document.getElementById('reasons-list');
+    SurveAI.data.screening.reasons.forEach(r => {
+      const li = document.createElement('li');
+      li.className = 'flex items-center justify-between px-4 py-3 text-sm bg-white';
+      const pct = Math.round((r.count / SurveAI.data.screening.excluded) * 100);
+      li.innerHTML = `<span class="text-slate-600">${r.label}</span><span class="font-semibold text-slate-700">${r.count} <span class="text-slate-400 font-normal">(${pct}%)</span></span>`;
+      rlist.appendChild(li);
+    });
+
+    SurveAI.initIcons();
+  </script>
+</body>
+</html>
